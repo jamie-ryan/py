@@ -1,0 +1,20 @@
+from sunpy.time import parse_time
+from sunpy.lightcurve import LightCurve
+
+
+#parse_time('2007-05-04T21:08:12')
+
+
+#parse_time(shmi) 
+nrb = 1
+tsi = np.zeros((ssi.tsi.shape), dtype='datetime64[us]')
+for j in range(0,nrb):
+    jj = str(j)
+    s1 = 'ssi.esirb'+jj
+    for i in range(0,len(ssi.tsi)): 
+        tsi[i] = parse_time(ssi.tsi[i])
+        
+
+
+light_curve = LightCurve.create({"param1": range(24*60)}, index = thmi)
+

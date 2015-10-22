@@ -39,7 +39,7 @@ for j in range(0,nrb):
     tmgw = np.zeros((smgw.tmgw.shape), dtype='datetime64[us]')
     thmi = np.zeros((shmi.thmi.shape), dtype='datetime64[us]')
     for i in range(0,len(ssi.tsi)): 
-        tsi[i] = parse_time(ssi.tsi[i]) #dt.strptime(ssi.tsi[i], '%d-%b-%Y %H:%M:%S.%f')
+        tsi[i] = dt.strptime(ssi.tsi[i], '%d-%b-%Y %H:%M:%S.%f')
     for i in range(0,len(smg.tmg)): 
         tmg[i] = dt.strptime(smg.tmg[i], '%d-%b-%Y %H:%M:%S.%f')
     for i in range(0,len(sbalmer.tspqk)): 

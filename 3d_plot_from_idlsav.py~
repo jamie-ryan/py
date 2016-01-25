@@ -13,22 +13,50 @@ asv = readsav(filepath+arraysav, verbose = True)
 #ssv = readsav(filepath+structsav, verbose = True) 
 csv = readsav(filepath+coordsav, verbose = True) 
 
-sie = asv.si_eimp
-mge = asv.mg_eimp
-balme = asv.balmer_eimp
-mgwe = asv.mgw_eimp
-hmie = asv.hmi_eimp
+sie = np.append(asv.si_eimp[::,0],asv.si_eimp[::,1])
+mge = np.append(asv.mg_eimp[::,0],asv.mg_eimp[::,1])
+balmere = np.append(asv.balmer_eimp[::,0],asv.balmer_eimp[::,1])
+mgwe = np.append(asv.mgw_eimp[::,0],asv.mgw_eimp[::,1])
+hmie = np.append(asv.hmi_eimp[::,0],asv.hmi_eimp[::,1])
 
+sicoords = np.zeros((2,20+1))
 
-sic1 = csv.sicoords1
-sic2 = csv.sicoords2
+sicoords[0,:10:] = csv.sicoords1[::,0]
+sicoords[1,:10:] = csv.sicoords1[::,1]
+sicoords[0,11::] = csv.sicoords2[::,0]
+sicoords[1,11::] = csv.sicoords2[::,1]
+sicoords[0,10] = 218.5
+sicoords[1,10] = 262.5
 
-#or
-cn = n_elements(csv.sicoords1)
-sic = fltarr(2, 2*cn)
-sic[*, 0: cn - 1] = csv.sicoords1
-sic[*, cn: *] = csv.sicoords2
+mgcoords[0,:10:] = csv.mgcoords1[::,0]
+mgcoords[1,:10:] = csv.mgcoords1[::,1]
+mgcoords[0,11::] = csv.mgcoords2[::,0]
+mgcoords[1,11::] = csv.mgcoords2[::,1]
+mgcoords[0,10] = 218.5
+mgcoords[1,10] = 262.5
 
+balmercoords[0,:10:] = csv.balmercoords1[::,0]
+balmercoords[1,:10:] = csv.balmercoords1[::,1]
+balmercoords[0,11::] = csv.balmercoords2[::,0]
+balmercoords[1,11::] = csv.balmercoords2[::,1]
+balmercoords[0,10] = 218.5
+balmercoords[1,10] = 262.5
+
+mgwcoords[0,:10:] = csv.mgwcoords1[::,0]
+mgwcoords[1,:10:] = csv.mgwcoords1[::,1]
+mgwcoords[0,11::] = csv.mgwcoords2[::,0]
+mgwcoords[1,11::] = csv.mgwcoords2[::,1]
+mgwcoords[0,10] = 218.5
+mgwcoords[1,10] = 262.5
+
+hmicoords[0,:10:] = csv.hmicoords1[::,0]
+hmicoords[1,:10:] = csv.hmicoords1[::,1]
+hmicoords[0,11::] = csv.hmicoords2[::,0]
+hmicoords[1,11::] = csv.hmicoords2[::,1]
+hmicoords[0,10] = 218.5
+hmicoords[1,10] = 262.5
+
+#check order of coords with respect to associated energy array
 #then try plotting E,  x,  z
 
 
@@ -55,3 +83,4 @@ ax = fig.add_subplot(111, projection='3d')
 #|c 	    | color. c can be a single color format string, or a sequence of color specifications of length N, or a sequence of N numbers to be mapped to colors using the cmap and norm specified via kwargs (see below). Note that c should not be a single numeric RGB or RGBA sequence because that is indistinguishable from an array of values to be colormapped. c can be a 2-D array in which the rows are RGB or RGBA, however.
 #|depthshade|Whether or not to shade the scatter markers to give the appearance of depth. Default is True.
 
+Axes3D.scatter(sicoord[0,:], sicoord[1,::], si_eimp[::,0], zdir='z', s=20, c='b', depthshade=True, *args, **kwargs)

@@ -72,7 +72,10 @@ hmicoords[1,10] = 262.5
 #|xs, ys    |x and y 
 #|zs 	    |z value(s), either one for all points or one for each point
 #|zdir 	    |Which direction to use as z (‘x’, ‘y’ or ‘z’) when plotting a 2D set.
-
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(sie[:21], sicoords[0,:], sicoords[1,::]  zdir='z')
+plt.show()
 
 #SCATTER PLOTS
 # Axes3D.scatter(xs, ys, zs=0, zdir='z', s=20, c='b', depthshade=True, *args, **kwargs)

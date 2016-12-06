@@ -28,13 +28,6 @@ def fractal_tree(iter, origin, t, r, theta, dtheta):
     lines.extend(fractal_tree(iter-1, (x,y), t * r, r, theta - dtheta, dtheta))
     return lines
 def draw_lines(lines, width=320, height=250):
-    # Calculate a tolerable palette
-#    palette = [0] * lines
-#    for i in xrange(lines):
-#        f = 1-abs((float(i)/lines-1)**15)
-#        r, g, b = colorsys.hsv_to_rgb(.66+f/3, 1-f/2, f)
-#        palette[i] = (int(r*255), int(g*255), int(b*255))
-
     """draw and return the fractal tree image"""
     # create empty white image to draw on
     image1 = Image.new("RGB", (width, height), (255, 255, 255))
@@ -65,33 +58,40 @@ if __name__ == '__main__':
     iter = 18
     niter = 18
     # experiment with trunk length (try 100)
-    t = 120
+    t = 150
     # experiment with factor to contract the trunk each iteration (try 0.65)
-    r = 0.65
+    r = 0.75
     # starting orientation (initial 90 deg)
-    theta = 90.0 * ang2rad
+    thetadegrees = 90.0
+    theta = thetadegrees * ang2rad
     # experiment with angle of the branch (try 60 deg)
-    dtheta = 10.0 * ang2rad
+    dthetadegrees = 60.0
+    dtheta = dthetadegrees * ang2rad
     # center of top
     #origin = (200, 0)
     # center of bottom
-    origin = (200, 0)
+    origin = (500, 0)
 
     lines = fractal_tree(iter, origin, t, r, theta, dtheta)
-    
+
     # change width and height as needed ...
-    width = 400
-    height = 600
-    image1 = draw_lines(lines, width, height)
-    
+    width = 1000
+    height = 1000
     # use PIL's show, internally saves a temporary bitmap file, then calls the default viewer
     # (the problem: these bitmap files are large and accumulate in one of the temp directories)
     #imgage1.show()
-    
+
     # or ...
     # save as .png .jpg .gif or .bmp file
     # (the .png format gives the smallest file size)
-    filename = "fractaltree.jpg"
+    image1 = draw_lines(lines, width, height)
+    iterst = str(iter)
+    tst = str(t)
+    rst = str(r)
+    thetast = str(thetadegrees)
+    dthetast = str(dthetadegrees)
+
+    filename = "fractal-tree-iter-"+iterst+"-t-"+tst+"-r-"+rst+"-theta-"+thetast+"-dtheta-"+dthetast+".jpg"
     image1.save(filename)
     image1.show()
     # ... and view the saved file, works with Windows only
